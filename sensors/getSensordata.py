@@ -1,4 +1,4 @@
-from dataObjects.sensorData import sensorData 
+from dataObjects.sensordata import sensorData 
 from measuredht22 import measureDHT22
 from sensors.measuremhz19b import measure_mh_z19b
 

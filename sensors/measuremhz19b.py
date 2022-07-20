@@ -1,4 +1,4 @@
-from dataObjects.sensorData import mhz19Measurement
+from dataObjects.sensordata import mhz19Measurement
 from statistics import median
 
 from mhz19b.mhz19b import mhz19b

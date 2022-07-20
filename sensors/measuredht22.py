@@ -1,6 +1,6 @@
 from machine import Pin
 from dht import DHT22 # type: ignore
-from dataObjects.sensorData import dht22Measurement 
+from dataObjects.sensordata import dht22Measurement 
 
 def measureDHT22(pinNumber:int) -> dht22Measurement: 
     print("Getting DHT22 Read...")
