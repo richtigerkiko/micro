@@ -1,12 +1,12 @@
 from machine import Timer
 import time
-# from sensors.getsensordata import getSensorData
+from Sensors import GetSensorData
 
 timer = Timer()
 
 def timerTick(timer):
     # # Run function to grab sensor data
-    # sensorData = getSensorData()
+    sensorData = GetSensorData()
     # time.sleep_ms(200)
     
     # # Run actions depending on data

@@ -1,9 +1,9 @@
-from dataObjects.sensordata import mhz19Measurement
 from statistics import median
+from DataObjects.SensorData.MH_Z19DataPoint import MH_Z19DataPoint
 
 from mhz19b.mhz19b import mhz19b
 
-def measure_mh_z19b(rx_pin:int, tx_pin:int) -> mhz19Measurement:
+def measure_mh_z19b(rx_pin:int, tx_pin:int) -> MH_Z19DataPoint:
     print("Getting mhz19 read...")
     SensorCO2 = mhz19b(rx_pin, tx_pin) # rx_pin= 16 and tx_pin= 17
     readinList= [] 
@@ -12,4 +12,4 @@ def measure_mh_z19b(rx_pin:int, tx_pin:int) -> mhz19Measurement:
         readinList.append(int(sum(SensorCO2.measure())))
     
     medianCo2Value = median(readinList) # reduce noise
-    return mhz19Measurement(medianCo2Value)
+    return MH_Z19DataPoint(medianCo2Value)
