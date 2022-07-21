@@ -1,7 +1,7 @@
 from mhz19b.mhz19b import mhz19b
 from DataObjects.SensorData import DHT22DataPoint, MH_Z19DataPoint, SensorData
 from machine import Pin
-from dht import DHT22  # type: ignore
+from dht import DHT22
 
 
 def measureDHT22(pinNumber: int) -> DHT22DataPoint:
