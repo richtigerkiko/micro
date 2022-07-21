@@ -17,4 +17,4 @@ def timerTick(timer):
     # # print("running display function")
     # time.sleep_ms(200)
     
-timer.init(period=1000, callback=timerTick)
+# timer.init(period=1000, callback=timerTick)
