@@ -1,20 +1,40 @@
-from machine import Timer
+from machine import Timer, Pin
 import time
-from Sensors import GetSensorData
+from Display import LCDDisplay
+from Measurements import SensorMeasurement
+from Sensors import Sensor_DHT22
 
 timer = Timer()
 
+try:
+    print("Initiating peripheral devices")
+    display = LCDDisplay(sdaPin=Pin(0), sclPin=Pin(1))
+    dht22Sensor = Sensor_DHT22(Pin(2))
+
+    
+except:
+    print("no display")
+    
+    
+
 def timerTick(timer):
     # # Run function to grab sensor data
-    sensorData = GetSensorData()
+    try:
+        sensorMeasure = SensorMeasurement(dht22Sensor)
+        sensorData = sensorMeasure.GetSensorData()
+        display.DisplayTempAndHumidity(sensorData)
+        time.sleep_ms(200)
+    except:
+        display.DisplayNoData()
     # time.sleep_ms(200)
     
-    # # Run actions depending on data
-    print("Running sensor driven actions")
-    # time.sleep_ms(200)
+    # # # Run actions depending on data
+    # # print("Running sensor driven actions")
+    # # time.sleep_ms(200)
     
-    # # Run display function to display sensor data on OLED
-    # # print("running display function")
-    # time.sleep_ms(200)
+    # # # Run display function to display sensor data on OLED
+
     
-# timer.init(period=1000, callback=timerTick)
+timer.init(mode=Timer.PERIODIC, callback=timerTick, period=1000)
+
+

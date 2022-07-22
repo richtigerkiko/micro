@@ -1,12 +1,32 @@
 from machine import Pin, I2C
+from DataObjects.SensorData import SensorData
 import ssd1306
 
 
-SDA = 1
-SCL = 2
+class LCDDisplay:
+    
+    SDA:Pin
+    SCL:Pin
 
-i2c = I2C(1, sda=Pin(4), scl=Pin(5))
+    i2c:I2C
 
-display = ssd1306.SSD1306_I2C(128, 64, i2c)
+    display:ssd1306.SSD1306_I2C
+    
+    def __init__(self, sdaPin:Pin, sclPin:Pin) -> None:
+        self.SDA = sdaPin
+        self.SCL = sclPin
+        self.i2c = I2C(0, sda=Pin(0), scl=Pin(1))
+        self.display = ssd1306.SSD1306_I2C(128, 64, self.i2c)
+        
+    def DisplayNoData(self) -> None:
+        self.display.fill(0)
+        self.display.text("No Data", 0,0)
+        self.display.show()
 
-display("Hello World")
+    def DisplayTempAndHumidity(self, data:SensorData) -> None:
+        self.display.fill(0)
+        self.display.text(f"Temp:     {data.dht22.Temperature:.1f} C", 0, 10)
+        self.display.text(f"Humidity: {data.dht22.Humidity:.1f} %", 0, 30)
+        self.display.text(f"CO2:      {data.mh_z19.CO2:.1f}", 0, 50)
+        self.display.show()
+        
