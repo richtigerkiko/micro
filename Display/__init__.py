@@ -2,7 +2,6 @@ from machine import Pin, I2C
 from Clock import DateTimeObj
 from DataObjects.SensorData import SensorData
 import ssd1306
-from urtc import DateTimeTuple
 
 class LCDDisplay:
     
@@ -34,9 +33,8 @@ class LCDDisplay:
     
     def DisplayTime(self, time:DateTimeObj) -> None:
         self.display.fill_rect(0, 40, 128, 24, 0)
-        dateString = f"{time.day:02d}.{time.month:02d}.{time.year}"
+        # dateString = f"{time.day:02d}.{time.month:02d}.{time.year}" 
         timeString = f"{time.hour:02d}:{time.minute:02d}:{time.second:02d}"
-        self.display.text(dateString, 0, 40, 1)
         self.display.text(timeString, 0, 50, 1)
         self.display.show()
     
