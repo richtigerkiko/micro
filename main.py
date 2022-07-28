@@ -27,11 +27,10 @@ def timerTick(timer):
         currentTime = clock.getTime()
         sensorMeasure = SensorMeasurement(dht22Sensor)
         sensorData = sensorMeasure.GetSensorData()
-        if currentTime.second % 10 == 0:
+        if currentTime.minute % 2 == 0 and currentTime.second == 0:
             WriteSensorLog(currentTime, sensorData)
         display.DisplayTempAndHumidity(sensorData)
         display.DisplayTime(currentTime)
-        time.sleep_ms(200)
     except:
         display.DisplayNoData()
     # time.sleep_ms(200)
