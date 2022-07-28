@@ -10,12 +10,25 @@ LogFileName = "log.csv"
 Max_File_Size = 50000
 
 
-
+def isFileToBig() -> bool: # returns filesize in bytes
+    try:
+        logFile = open(LogFileName, "r")
+        logFile.seek(0, 2)
+        size = logFile.tell()
+        logFile.close()
+        return Max_File_Size <= size
+    except:
+        print("no file")
+        return False # if error then file doesnt exist so its not too big
+    
 def WriteDataLine(passed):
-    log = open(LogFileName,"a") #open in append - creates if not existing, will append if it exists
-    log.write(passed)
-    log.flush()
-    log.close()
+    if isFileToBig() == False:
+        log = open(LogFileName,"a") #open in append - creates if not existing, will append if it exists
+        log.write(passed)
+        log.flush()
+        log.close()
+    else:
+        print("cant log, file too big")
     
     
 def WriteSensorLog(timeStamp:DateTimeObj, sensorData:SensorData):
