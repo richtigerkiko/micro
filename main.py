@@ -4,6 +4,7 @@ import Clock
 from Display import LCDDisplay
 from Measurements import SensorMeasurement
 from Sensors import Sensor_DHT22
+from csvlog import WriteSensorLog
 
 timer = Timer()
 
@@ -26,6 +27,8 @@ def timerTick(timer):
         currentTime = clock.getTime()
         sensorMeasure = SensorMeasurement(dht22Sensor)
         sensorData = sensorMeasure.GetSensorData()
+        if currentTime.second % 10 == 0:
+            WriteSensorLog(currentTime, sensorData)
         display.DisplayTempAndHumidity(sensorData)
         display.DisplayTime(currentTime)
         time.sleep_ms(200)
