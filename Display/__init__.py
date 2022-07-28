@@ -1,7 +1,8 @@
 from machine import Pin, I2C
+from Clock import DateTimeObj
 from DataObjects.SensorData import SensorData
 import ssd1306
-
+from urtc import DateTimeTuple
 
 class LCDDisplay:
     
@@ -24,9 +25,18 @@ class LCDDisplay:
         self.display.show()
 
     def DisplayTempAndHumidity(self, data:SensorData) -> None:
-        self.display.fill(0)
-        self.display.text(f"Temp:     {data.dht22.Temperature:.1f} C", 0, 10)
-        self.display.text(f"Humidity: {data.dht22.Humidity:.1f} %", 0, 30)
-        self.display.text(f"CO2:      {data.mh_z19.CO2:.1f}", 0, 50)
+        self.display.fill_rect(0, 0, 128, 30, 0)
+        self.display.text(f"Temp:     {data.dht22.Temperature:.1f} C", 0, 5)
+        self.display.text(f"Humidity: {data.dht22.Humidity:.1f} %", 0, 15)
+        # self.display.text(f"CO2:      {data.mh_z19.CO2:.1f}", 0, 50)
+        self.display.hline(30, 30, 78, 1)
         self.display.show()
-        
+    
+    def DisplayTime(self, time:DateTimeObj) -> None:
+        self.display.fill_rect(0, 40, 128, 24, 0)
+        dateString = f"{time.day:02d}.{time.month:02d}.{time.year}"
+        timeString = f"{time.hour:02d}:{time.minute:02d}:{time.second:02d}"
+        self.display.text(dateString, 0, 40, 1)
+        self.display.text(timeString, 0, 50, 1)
+        self.display.show()
+    

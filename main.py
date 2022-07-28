@@ -1,5 +1,6 @@
 from machine import Timer, Pin
 import time
+import Clock
 from Display import LCDDisplay
 from Measurements import SensorMeasurement
 from Sensors import Sensor_DHT22
@@ -10,6 +11,7 @@ try:
     print("Initiating peripheral devices")
     display = LCDDisplay(sdaPin=Pin(0), sclPin=Pin(1))
     dht22Sensor = Sensor_DHT22(Pin(2))
+    clock = Clock.DS3231(sdaPin=Pin(0), sclPin=Pin(1))
 
     
 except:
@@ -20,9 +22,12 @@ except:
 def timerTick(timer):
     # # Run function to grab sensor data
     try:
+        # get current time
+        currentTime = clock.getTime()
         sensorMeasure = SensorMeasurement(dht22Sensor)
         sensorData = sensorMeasure.GetSensorData()
         display.DisplayTempAndHumidity(sensorData)
+        display.DisplayTime(currentTime)
         time.sleep_ms(200)
     except:
         display.DisplayNoData()
