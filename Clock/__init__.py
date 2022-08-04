@@ -38,3 +38,9 @@ class DS3231:
         else:
             timeObj = DateTimeObj()
         return timeObj
+    
+    def setTime(self, dateTime:DateTimeObj) -> None:
+        # "DateTimeTuple", ["year", "month", "day", "weekday", "hour", "minute", "second", "millisecond"]
+        self.clock.datetime(urtc.datetime_tuple(dateTime.year, dateTime.month, dateTime.day, dateTime.weekday, dateTime.hour, dateTime.minute))
+
+

@@ -1,5 +1,3 @@
-from LEDs import InternalLED
-from mhz19b.mhz19b import mhz19b
 from DataObjects.SensorData import DHT22DataPoint, MH_Z19DataPoint
 from machine import Pin
 from dht import DHT22

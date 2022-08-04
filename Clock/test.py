@@ -1,6 +1,6 @@
 from machine import Pin, I2C
-import urtc
+import Clock
 
-clock = urtc.DS3231(I2C(0, sda=Pin(0), scl=Pin(1)))
+clock = Clock.DS3231(sdaPin=Pin(0), sclPin=Pin(1))
 
-print(clock.datetime()[0])
+clock.setTime(dateTime=Clock.DateTimeObj(2922,8,1,0,21,32,0,0))

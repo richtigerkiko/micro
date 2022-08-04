@@ -16,6 +16,6 @@ class SensorMeasurement:
 
         # # get mh_z19 data
         mhz_19 = MH_Z19DataPoint(0)
-        # led.LEDOff()
+        led.LEDOff()
         return SensorData(dht22measurement, mhz_19)
         

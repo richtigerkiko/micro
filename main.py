@@ -18,7 +18,8 @@ try:
 except:
     print("no display")
     
-    
+# Set Time  
+# clock.setTime(dateTime=Clock.DateTimeObj(2022, 8, 4, 3, 11, 58, 0, 0))
 
 def timerTick(timer):
     # # Run function to grab sensor data
@@ -27,10 +28,11 @@ def timerTick(timer):
         currentTime = clock.getTime()
         sensorMeasure = SensorMeasurement(dht22Sensor)
         sensorData = sensorMeasure.GetSensorData()
-        if currentTime.minute % 2 == 0 and currentTime.second == 0:
-            WriteSensorLog(currentTime, sensorData)
-        display.DisplayTempAndHumidity(sensorData)
-        display.DisplayTime(currentTime)
+        # if currentTime.minute % 2 == 0 and currentTime.second == 0:
+        #     # WriteSensorLog(currentTime, sensorData)
+        if display != None:
+            display.DisplayTempAndHumidity(sensorData)
+            display.DisplayTime(currentTime)
     except:
         display.DisplayNoData()
     # time.sleep_ms(200)
