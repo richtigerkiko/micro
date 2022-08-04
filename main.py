@@ -3,7 +3,7 @@ import time
 import Clock
 from Display import LCDDisplay
 from Measurements import SensorMeasurement
-from Sensors import Sensor_DHT22
+from Sensors import Sensor_DHT22, Sensor_MHZ19C
 from csvlog import WriteSensorLog
 
 timer = Timer()
@@ -12,6 +12,7 @@ try:
     print("Initiating peripheral devices")
     display = LCDDisplay(sdaPin=Pin(0), sclPin=Pin(1))
     dht22Sensor = Sensor_DHT22(Pin(2))
+    mhzSensor = Sensor_MHZ19C(16, 17)
     clock = Clock.DS3231(sdaPin=Pin(0), sclPin=Pin(1))
 
     
@@ -19,14 +20,14 @@ except:
     print("no display")
     
 # Set Time  
-# clock.setTime(dateTime=Clock.DateTimeObj(2022, 8, 4, 3, 11, 58, 0, 0))
+# clock.setTime(dateTime=Clock.DateTimeObj(2022, 8, 4, 3, 23, 34, 0, 0))
 
 def timerTick(timer):
     # # Run function to grab sensor data
     try:
         # get current time
         currentTime = clock.getTime()
-        sensorMeasure = SensorMeasurement(dht22Sensor)
+        sensorMeasure = SensorMeasurement(dht22Sensor, mhzSensor)
         sensorData = sensorMeasure.GetSensorData()
         # if currentTime.minute % 2 == 0 and currentTime.second == 0:
         #     # WriteSensorLog(currentTime, sensorData)

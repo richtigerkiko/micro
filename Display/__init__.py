@@ -25,9 +25,9 @@ class LCDDisplay:
 
     def DisplayTempAndHumidity(self, data:SensorData) -> None:
         self.display.fill_rect(0, 0, 128, 30, 0)
-        self.display.text(f"Temp:     {data.dht22.Temperature:.1f} C", 0, 5)
-        self.display.text(f"Humidity: {data.dht22.Humidity:.1f} %", 0, 15)
-        # self.display.text(f"CO2:      {data.mh_z19.CO2:.1f}", 0, 50)
+        self.display.text(f"Temp:     {data.dht22.Temperature:.1f} C", 0, 0)
+        self.display.text(f"Humidity: {data.dht22.Humidity:.1f} %", 0, 10)
+        self.display.text(f"CO2: {data.mh_z19.CO2:.1f}", 0, 20)
         self.display.hline(30, 30, 78, 1)
         self.display.show()
     
